@@ -7,6 +7,12 @@ annotate invoiceTrackingSrv.Invoices with @UI.DataPoint #invoiceDate: {
 annotate invoiceTrackingSrv.Invoices with @UI.DataPoint #totalAmount: {
   Value: totalAmount,
   Title: 'Total Amount',
+  CriticalityCalculation: {
+    ImprovementDirection: #Minimize,
+    ToleranceRangeHighValue: 200,
+    DeviationRangeHighValue: 260
+  },
+  CriticalityRepresentation: #WithIcon
 };
 annotate invoiceTrackingSrv.Invoices with @UI.HeaderFacets: [
  { $Type : 'UI.ReferenceFacet', Target : '@UI.DataPoint#invoiceDate', ID: 'InvoiceDate' },
@@ -36,7 +42,7 @@ annotate invoiceTrackingSrv.Invoices with @UI.SelectionFields: [
 annotate invoiceTrackingSrv.Invoices with @UI.LineItem : [
     { $Type: 'UI.DataField', Value: invoiceNumber },
     { $Type: 'UI.DataField', Value: invoiceDate },
-    { $Type: 'UI.DataField', Value: totalAmount }
+    { $Type: 'UI.DataFieldForAnnotation', Target: '@UI.DataPoint#totalAmount' }
 ];
 annotate invoiceTrackingSrv.Invoices with @UI.FieldGroup #invoiceDetails: {
   $Type: 'UI.FieldGroupType', Data: [
